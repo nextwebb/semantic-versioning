@@ -20,5 +20,5 @@ jobs:
         run: npm run test
       - name: Create new release
         env:
-          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GH_TOKEN: ${{secrets.GHA_SECRET}}
         run: npx semantic-release
