@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 name: Release versioning
  
 on:
@@ -22,3 +23,27 @@ jobs:
         env:
           GH_TOKEN: ${{secrets.GHA_SECRET}}
         run: npx semantic-release
+=======
+name: Release Version
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "16.x"
+      - run: npm ci
+      - run: npm run build --if-present
+      - run: npx semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+>>>>>>> 3a8b707af6392866781511181ec0199aaa4332ff
