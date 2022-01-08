@@ -1,29 +1,4 @@
-<<<<<<< HEAD
-name: Release versioning
- 
-on:
-  push:
-    branches: [ main ]
- 
-jobs:
-  Test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout source code
-        uses: actions/checkout@v2
-      - name: Use NodeJS v14.15.4
-        uses: actions/setup-node@v1
-        with:
-          node-version: 14.15.4
-      - name: Install dependencies
-        run: npm ci
-      - name: Run tests
-        run: npm run test
-      - name: Create new release
-        env:
-          GH_TOKEN: ${{secrets.GHA_SECRET}}
-        run: npx semantic-release
-=======
+
 name: Release Version
 
 on:
@@ -46,4 +21,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
->>>>>>> 3a8b707af6392866781511181ec0199aaa4332ff
