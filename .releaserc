@@ -1,0 +1,4 @@
+module.exports = {
+    repositoryUrl: 'https://github.com/nextwebb/semantic-versioning.git',
+    branches: ['main'],
+}
