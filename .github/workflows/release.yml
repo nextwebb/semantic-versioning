@@ -5,18 +5,25 @@ on:
     branches: [ main ]
  
 jobs:
-  Test:
+  release:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [12.x, 14.x]
+#     strategy:
+#       matrix:
+#         node-version: [12.x, 14.x]
     steps:
       - name: Checkout source code
         uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js 16
         uses: actions/setup-node@v2
         with:
-           node-version: ${{ matrix.node-version }}
+           node-version: 16
+      - name: cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
       - name: Install dependencies
         run: npm ci
       - name: Create new release
