@@ -1,2 +1,0 @@
-- name: Semantic Pull Requests
-  uses: wow-actions/semantic-pull-requests@v1.0.0
