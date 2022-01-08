@@ -1,32 +1,22 @@
-name: Release versioning
- 
+name: Release Version
+
 on:
   push:
-    branches: [ main ]
- 
+    branches:
+      - main
+
 jobs:
   release:
+    name: Release
     runs-on: ubuntu-latest
-#     strategy:
-#       matrix:
-#         node-version: [12.x, 14.x]
     steps:
-      - name: Checkout source code
-        uses: actions/checkout@v2
-      - name: Use Node.js 16
-        uses: actions/setup-node@v2
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v1
         with:
-           node-version: 16
-      - name: cache
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-      - name: Install dependencies
-        run: npm ci
-      - name: Create new release
+          node-version: "12.x"
+      - run: npm ci
+      - run: npm run build --if-present
+      - run: npm test
+      - run: npx semantic-release
         env:
-          GH_TOKEN: ${{secrets.GHA_SECRET}}
-        run: npx semantic-release
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
