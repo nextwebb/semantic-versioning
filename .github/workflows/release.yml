@@ -19,8 +19,6 @@ jobs:
            node-version: ${{ matrix.node-version }}
       - name: Install dependencies
         run: npm ci
-      - name: Run tests
-        run: npm run test
       - name: Create new release
         env:
           GH_TOKEN: ${{secrets.GHA_SECRET}}
